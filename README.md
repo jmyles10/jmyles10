@@ -1,10 +1,9 @@
-- 👋 Hi, I’m @jmyles10
+- 👋 Hi, I’m Jaden Coffie
 - 👀 I’m interested in programming and soccer
 - 🌱 I’m currently learning java
 - 💞️ I’m looking to collaborate on anything
-- 📫 How to reach me email jmylesc10@gmail.com and istagram @_myles.away and LinkedIn
-- 😄 Pronouns: He/Him
-- ⚡ Fun fact: I really enjoy singing
+- 📫 How to reach me email jmylesc10@gmail.com and LinkedIn
+- ⚡ Fun fact: I really enjoy cooking
 
 <!---
 jmyles10/jmyles10 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
