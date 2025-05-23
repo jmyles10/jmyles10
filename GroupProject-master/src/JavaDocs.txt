@@ -1,0 +1,228 @@
+Explanation of Java Code:
+
+1. FoodOrderSystem:
+    - This class represents a food ordering system.
+    - It allows customers to place orders for different types of food such as pizza, sushi, burger, dessert, and beverage.
+    - It keeps track of the customer's name and the total cost of the order.
+
+2. GroupProjectPassword:
+    - This class generates a password for a user based on their first and last name.
+    - It concatenates the last letter of the first name, a random number, and the first three letters of the last name to create the password.
+    - It then adds "****" to the end of the password and reverses it using StringBuilder.
+
+3. Main:
+    - This class represents the main entry point of the program.
+    - It starts by asking the user to create a password based on their name.
+    - After password creation, it asks for the user's full name, email, and phone number.
+    - It then initiates a food ordering process using the FoodOrderSystem class.
+    - It calculates the total cost of the order, including tax and optional tip, and displays the final amount.
+    - Additionally, it randomly generates a delivery person's name from predefined first and last names.
+
+4. RandomNameGenerator:
+    - This class generates a random name by selecting a random first name and last name from predefined arrays.
+
+Explanation of Usage:
+- To use the program, compile and run the Main class.
+- Follow the prompts to create a password, enter personal information, and place food orders.
+- The program calculates the total cost of the order and provides a delivery person's name.
+- The GroupProjectPassword class demonstrates password generation and manipulation techniques.
+- The RandomNameGenerator class shows how to generate random names using predefined arrays of first and last names.
+
+5. Receipt:
+- This class generates a receipt at the end of the Main class that has the following listed:
+    - Subtotal
+    - Tax (at 6%)
+    - Option for providing a tip 
+    - Lists the total of the items purchased
+- There is also an area for Date and Time, that prints in the format of Day, Month, Date, Time, Timezone, Year
+
+
+
+Complete Code:
+import java.util.Scanner;
+
+public class FoodOrderSystem {
+    private String customerName;
+    private double total;
+
+    public FoodOrderSystem(String customerName) {
+        this.customerName = customerName;
+        this.total = 0.0;
+    }
+
+    public void startOrdering(Scanner scanner) {
+        boolean ordering = true;
+        while (ordering) {
+            System.out.println("What type of food would you like? \nPizza \nSushi \nBurger \nDessert \nBeverage");
+            String foodType = scanner.nextLine().toLowerCase();
+            switch (foodType) {
+                case "pizza":
+                    orderPizza(scanner);
+                    break;
+                case "sushi":
+                    orderSushi(scanner);
+                    break;
+                case "burger":
+                    orderBurger(scanner);
+                    break;
+                case "dessert":
+                    orderDesserts(scanner);
+                    break; // Added break statement
+                case "beverage":
+                    orderBeverage(scanner);
+                    break; // Added break statement
+                default:
+                    System.out.println("Invalid choice. Please select from: \nPizza \nSushi \nBurger \nDessert \nBeverage.");
+            }
+            System.out.println("Would you like to purchase anything else? (yes/no)");
+            String continueOrder = scanner.nextLine().toLowerCase();
+            ordering = continueOrder.equals("yes");
+        }
+    }
+
+    private void orderPizza(Scanner scanner) {
+        System.out.println("What toppings would you like? \nSausage \nPepperoni \nVeggie");
+        String pizzaType = scanner.nextLine().toLowerCase();
+        total += 10.99;
+        System.out.println("You ordered a " + pizzaType + " pizza.");
+    }
+
+    private void orderSushi(Scanner scanner) {
+        System.out.println("What type of sushi would you like? \nCrab \nShrimp \nVeggie");
+        String sushiType = scanner.nextLine().toLowerCase();
+        total += 10.99;
+        System.out.println("You ordered " + sushiType + " sushi.");
+    }
+
+    private void orderBurger(Scanner scanner) {
+        System.out.println("What type of burger would you like? \nCheeseburger \nVeggie Burger");
+        String burgerType = scanner.nextLine().toLowerCase();
+        total += 10.99;
+        System.out.println("You ordered a " + burgerType + ".");
+    }
+
+    private void orderDesserts(Scanner scanner) {
+        System.out.println("What dessert would you like? \nIce Cream \nBrownie \nCake");
+        String dessertType = scanner.nextLine().toLowerCase();
+
+        double dessertPrice = 0.0;
+        switch (dessertType) {
+            case "ice cream":
+                dessertPrice = 3.99;
+                break;
+            case "brownie":
+                dessertPrice = 4.99;
+                break;
+            case "cake":
+                dessertPrice = 5.99;
+                break;
+            default:
+                System.out.println("Invalid dessert choice. Please select from: \nIce Cream \nBrownie \nCake");
+                return; // Return without adding to total if invalid choice
+        }
+
+        total += dessertPrice;
+        System.out.println("You ordered " + dessertType + ".");
+    }
+
+    private void orderBeverage(Scanner scanner) {
+        System.out.println("What beverage would you like? \nCoke \nSprite \nLemonade \nWater");
+        String beverageType = scanner.nextLine().toLowerCase();
+
+        double beveragePrice = 0.0;
+        switch (beverageType) {
+            case "coke":
+                beveragePrice = 1.99;
+                break;
+            case "sprite":
+                beveragePrice = 1.99;
+                break;
+            case "lemonade":
+                beveragePrice = 1.99;
+                break;
+            case "water":
+                beveragePrice = 1.99;
+                break;
+            default:
+                System.out.println("Invalid beverage choice. Please select from: \nCoke \nSprite \nLemonade \nWater");
+                return; // Return without adding to total if invalid choice
+        }
+        total += beveragePrice;
+        System.out.println("You ordered " + beverageType + ".");
+    }
+
+    public double getTotal() {
+        return total;
+    }
+}
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class GroupProjectPassword {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Ask user to enter first and last name
+        System.out.print("Enter your first name: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Enter your last name: ");
+        String lastName = scanner.nextLine();
+
+        // Convert the first name's last letter to uppercase
+        char lastLetterFirstName = Character.toUpperCase(firstName.charAt(firstName.length() - 1));
+
+        // Generate a random number from 10 to 99
+        Random random = new Random();
+        int randomNumber = random.nextInt(90) + 10;
+
+        // Get the first three letters of the last name and convert to lowercase
+        String firstThreeLettersLastName = lastName.substring(0, Math.min(3, lastName.length())).toLowerCase();
+
+        // Create the password string
+        String password = lastLetterFirstName + String.valueOf(randomNumber) + firstThreeLettersLastName;
+
+        // Print the password string
+        System.out.println("Password string: " + password);
+
+        // Use concat method to add four **** values
+        password = password.concat("****");
+
+        // Print the password after using concat
+        System.out.println("Password after using concat: " + password);
+
+        // Reverse the password using StringBuilder
+        StringBuilder reversedPassword = new StringBuilder(password);
+        reversedPassword.reverse();
+
+        // Print the reversed password
+        System.out.println("Reversed password: " + reversedPassword);
+
+        scanner.close();
+    }
+}
+
+import java.util.Scanner;
+import java.util.Random;
+import java.text.DecimalFormat;
+
+public class Main {
+    //Added formatter for two decimal places ($X.XX)
+    private static final DecimalFormat df = new DecimalFormat("0.00");
+    private static final String[] FIRST_NAMES = {"John", "Alice", "Michael", "Emma", "David", "Olivia", "James", "Sophia", "Robert", "Isabella"};
+    private static final String[] LAST_NAMES = {"Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia", "Rodriguez", "Wilson"};
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Password creation
+        System.out.println("Welcome to Click N Eat! An online ordering system \nLet's first create a password.");
+        System.out.println("Enter your first name: ");
+        String firstName = scanner.nextLine();
+
+        System.out.println("Enter your last name: ");
+        String lastName = scanner.nextLine();
+
+        char lastLetterFirstName = Character.toUpperCase(firstName.charAt(firstName.length() - 1));
+        Random random = new Random();
+        int randomNumber = random.nextInt(90)
